@@ -60,7 +60,7 @@ function compose() {
   const chosen = CONFIG.keywords.filter((k) => selected.has(k.id));
   if (chosen.length === 0) return '';
   const body = shuffle(chosen).map((k) => pick(k.phrases));
-  const opener = pick(CONFIG.openers);
+  const opener = Math.random() < CONFIG.openerRate ? pick(CONFIG.openers) : '';
   const sentences = (opener ? [opener, ...body] : body).map((s) => s.replace(/[.!~\s]+$/, ''));
   return decorate(sentences);
 }

@@ -1,0 +1,1 @@
+# naver-auto-review-samsan

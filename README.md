@@ -1,19 +1,25 @@
 # 삼산 한식뷔페 리뷰 도우미
 
 QR → 키워드 선택 → 문장 복사 → 네이버 영수증 리뷰 화면(`https://m.place.naver.com/my/checkin`)으로 이동하는 중간 페이지입니다.
-서버 없이 `index.html` 한 파일로 동작하며, 개인정보를 수집하지 않습니다.
+서버·빌드 없이 정적 파일만으로 동작하며(외부 라이브러리 없음), 개인정보를 수집하지 않습니다.
 
 ## 파일
 
 | 파일 | 용도 |
 | --- | --- |
-| `index.html` | 중간 페이지 (외부 라이브러리 없음) |
+| `index.html` | 화면 구조(마크업) |
+| `css/style.css` | 디자인 (색상 변수, 다크모드 포함) |
+| `js/config.js` | **매장명·네이버 주소·키워드·문장 설정** (자주 고치는 파일) |
+| `js/app.js` | 문장 생성·복사·이동 동작 (보통 수정 불필요) |
 | `qr/review-qr.png` | 인쇄용 QR (1024px, 오류정정 H) |
 | `qr/review-qr.svg` | 확대 인쇄용 벡터 QR |
 
+`js/config.js`가 `js/app.js`보다 먼저 불러와져야 합니다(`index.html`의 `<script>` 순서 유지).
+ES module은 `file://`로 열면 막히므로 일반 `<script>`를 사용합니다.
+
 ## 키워드·문장·링크 수정
 
-`index.html` 아래쪽 `<script>`의 `CONFIG` 블록만 고치면 됩니다.
+`js/config.js`의 `CONFIG` 블록만 고치면 됩니다.
 
 - `reviewUrl`: 버튼을 눌렀을 때 이동할 네이버 주소
 - `openers`: 문장 앞에 붙는 중립적인 방문 문장 (칭찬 없이)
